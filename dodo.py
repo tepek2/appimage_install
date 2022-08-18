@@ -1,9 +1,10 @@
+from dataclasses import field
 import os
 import re
 from doit.action import CmdAction
 
 TARGET_DIR = "~/bin"
-SNAKE_CASE_REGEX_FILE = re.compile(r"^[a-z0-9]+(_[a-z0-9]+)*(\.sh)$")
+KEBAB_CASE_REGEX_FILE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*(\.sh)$")
 
 
 def copy_utils():
@@ -23,7 +24,7 @@ def copy_scripts():
     return_cmd = ""
     folder_content = os.listdir("./")
     for item in folder_content:
-        if re.match(SNAKE_CASE_REGEX_FILE, item):
+        if re.match(KEBAB_CASE_REGEX_FILE, item):
             script_name = item.replace(".sh", "")
             return_cmd += f"""
                 cp ./{item} {TARGET_DIR}/{script_name}

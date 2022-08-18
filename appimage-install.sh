@@ -77,6 +77,7 @@ Terminal=false
 }
 
 install_image() {
+    chmod +x "$1"
     if [[ ! $1 == /* ]]; then
         image_path="./$1"
     fi
